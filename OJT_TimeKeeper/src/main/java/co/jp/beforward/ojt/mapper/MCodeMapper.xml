@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.jp.beforward.ojt.mapper.MCodeMapper">
+    <select id="findCodeName" resultType="co.jp.beforward.ojt.domain.MCode">
+        SELECT
+            ID
+          , CODE
+          , CODE_NAME
+          , ORDER_NO 
+        FROM
+            M_CODE
+        WHERE
+            ID = #{id}
+            AND
+            CODE = #{code}
+        ORDER BY
+            ORDER_NO
+    </select>
+    
+    <select id="findCodes" resultType="co.jp.beforward.ojt.domain.MCode">
+        SELECT
+            ID
+          , CODE
+          , CODE_NAME
+          , ORDER_NO 
+        FROM
+            M_CODE
+        WHERE
+            ID = #{id}
+        ORDER BY
+            ORDER_NO
+    </select>
+</mapper>

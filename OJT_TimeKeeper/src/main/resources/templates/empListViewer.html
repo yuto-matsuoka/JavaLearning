@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+	<title>社員管理</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+ 		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/employees">社員管理</a>
+			</div>
+		</div>
+	</nav>
+  	<div class="container">
+		<div class="card card-primary mb-3">
+			<div class="card-header">
+				<h5 class="card-title">社員一覧<a href="/employees/register" class="btn btn-success float-right">新規</a></h5>
+			</div>
+			<!-- 社員マスタが取得できない場合 -->
+			<div class="card-body" th:if="!${empForms.size()}">
+				<p>対象データが存在しません。</p>
+			</div>
+			<!-- 社員マスタが取得できる場合 -->
+			<table class="table table-striped" th:if="${empForms.size()}">
+				<thead>
+					<tr>
+						<th style="width: 20%">社員番号</th>
+						<th style="width: 40%">社員名</th>
+						<th style="width: 10%">社員区分</th>
+						<th style="width: 30%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="empForm:${empForms}" th:object="${empForm}">
+						<td th:text="*{empNum}"></td>
+						<td th:text="*{empNm}"></td>
+						<td th:text="*{empDiv}"></td>
+						<td class="float-right">
+							<form th:action="@{/employees/edit}" th:method="post" th:object="${empForm}">
+								<button class="btn btn-primary" name="empDetail">詳細</button>
+								<button class="btn btn-primary" name="empEdit">変更</button>
+								<button class="btn btn-primary" name="empDelete">削除</button>
+ 								<!-- 以下でempNum以外で必要な値を設定する(POSTで使用) -->
+ 								<input type="hidden" name="empNum" th:value="*{empNum}" />
+ 								<input type="hidden" name="appStaDate" th:value="*{appStaDate}" />
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+		
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	
+</body>
+</html>

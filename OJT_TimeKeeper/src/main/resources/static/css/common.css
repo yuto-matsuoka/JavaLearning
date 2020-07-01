@@ -1,0 +1,5 @@
+
+.date-input[readonly],
+.datetime-input[readonly] {
+	background-color: #fff;
+}

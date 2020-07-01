@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.jp.beforward.ojt.mapper.MEmpMapper">
+    <select id="findAll" resultType="co.jp.beforward.ojt.domain.MEmp">
+        SELECT
+            APP_STA_DATE
+          , APP_END_DATE
+          , EMP_NUM
+          , EMP_NM
+          , PASS_WORD
+          , EMP_DIV
+        FROM
+            M_EMP
+        ORDER BY
+            EMP_NUM
+          , APP_STA_DATE DESC
+    </select>
+
+    <select id="findOne" resultType="co.jp.beforward.ojt.domain.MEmp">
+        SELECT
+            APP_STA_DATE
+          , APP_END_DATE
+          , EMP_NUM
+          , EMP_NM
+          , PASS_WORD
+          , EMP_DIV
+        FROM
+            M_EMP
+        WHERE
+            APP_STA_DATE = #{appStaDate}
+            AND
+            EMP_NUM = #{empNum}
+        ORDER BY
+            EMP_NUM
+          , APP_STA_DATE DESC
+    </select>
+
+
+    <delete id="delete">
+        DELETE
+        FROM
+            M_EMP
+        WHERE
+            APP_STA_DATE = #{appStaDate}
+            AND
+            EMP_NUM = #{empNum}
+    </delete>
+  
+    <update id="update">
+        UPDATE 
+            M_EMP
+        SET
+            APP_END_DATE = #{appEndDate}
+  	      , EMP_NM = #{empNm}
+  	      , PASS_WORD = #{passWord}
+  	      , EMP_DIV = #{empDiv}
+          , UPD_USER = 'OJT'
+   	      , UPD_PG = 'OJT'
+  	      , UPD_DATE = current_timestamp
+        WHERE
+            APP_STA_DATE = #{appStaDate}
+            AND
+            EMP_NUM = #{empNum}
+    </update>
+  
+    <insert id="insert">
+        INSERT
+        INTO
+            M_EMP
+            (
+                APP_STA_DATE
+              , APP_END_DATE
+              , EMP_NUM
+              , EMP_NM
+              , PASS_WORD
+              , EMP_DIV
+              , REG_USER
+              , REG_PG
+              , REG_DATE
+              , UPD_USER
+              , UPD_PG
+              , UPD_DATE
+            )
+        VALUES
+            (
+                #{appStaDate}
+              , #{appEndDate}
+              , #{empNum}
+              , #{empNm}
+              , #{passWord}
+              , #{empDiv}
+              , 'OJT'
+              , 'OJT'
+              , current_timestamp
+              , 'OJT'
+              , 'OJT'
+              , current_timestamp
+            )
+    </insert>
+</mapper>
